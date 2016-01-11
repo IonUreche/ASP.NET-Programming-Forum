@@ -39,7 +39,18 @@
                             </RoleGroups>
 
                          </asp:LoginView> 
-                            
+                            <asp:LoginView ID="LoginView4" runat="server">
+
+                             <RoleGroups>
+                                <asp:RoleGroup Roles="Admin">
+                                    <ContentTemplate>
+                                        |
+                                        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/ManageCategories.aspx" > Manage Categories </asp:HyperLink>
+                                    </ContentTemplate>
+                                </asp:RoleGroup>
+                            </RoleGroups>
+
+                         </asp:LoginView> 
                         
                        
                         

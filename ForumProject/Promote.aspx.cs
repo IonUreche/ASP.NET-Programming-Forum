@@ -15,8 +15,6 @@ public partial class PromoteToModerator : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-        // Bind roles to GridView.
-
             try
             {
                 var rolesArray = Roles.GetRolesForUser();
