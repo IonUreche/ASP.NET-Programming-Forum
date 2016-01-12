@@ -24,4 +24,8 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
         Response.Redirect("Promote.aspx");
     }
+    protected void BSearch_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Search.aspx?q=" + Server.UrlEncode(TBSearch.Text));
+    }
 }

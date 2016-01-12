@@ -4,7 +4,7 @@
     <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" BackColor="#F7F6F3" BorderColor="#E6E2D8" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="0.8em" 
         OnCreatedUser="CreateUserWizard1_CreatedUser" 
         OnFinishButtonClick="CreateUserWizard1_FinishButtonClick"
-        OnContinueButtonClick="CreateUserWizard1_ContinueButtonClick" ActiveStepIndex="0">
+        OnContinueButtonClick="CreateUserWizard1_ContinueButtonClick">
 
         <ContinueButtonStyle BackColor="#FFFBFF" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" ForeColor="#284775" />
         <CreateUserButtonStyle BackColor="#FFFBFF" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" ForeColor="#284775" />

@@ -52,8 +52,18 @@
 
                          </asp:LoginView> 
                         
-                       
-                        
+                            <br />
+                            <asp:TextBox ID="TBSearch" runat="server"></asp:TextBox> &nbsp;
+                            <asp:Button ID="BSearch" runat="server" Text="Search" OnClick="BSearch_Click"/>
+                            
+                            <asp:LoginView ID="LoginView5" runat="server">
+                                <LoggedInTemplate>
+                                    <div>
+                                        <asp:HyperLink ID="HLEditprofile" runat="server" NavigateUrl="~/EditProfile.aspx"> Edit Profile </asp:HyperLink>
+                                    </div>
+                                </LoggedInTemplate>
+                            </asp:LoginView>
+                            
                         </h4>
                     </div>
                     
