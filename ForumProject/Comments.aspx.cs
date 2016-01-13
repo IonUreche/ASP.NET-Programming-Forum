@@ -14,49 +14,57 @@ public partial class Comments : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        int forumId = int.Parse(Request.Params["forumId"]);
-
-        string queryString = "SELECT question FROM Forum WHERE forumId = @forumId";
-
-        Label LResult = (Label)LoginView1.FindControl("LResult");
-
-        LResult.Text = "";
-
-        SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\mydb.mdf;Integrated Security=True");
-
-        string[] allRecords;
-
-        using (var command = new SqlCommand(queryString, connection))
-        {
-            command.Parameters.Add("@forumId", SqlDbType.Int).Value = forumId;
-            connection.Open();
-            using (var reader = command.ExecuteReader())
+        if (Request.Params["forumId"] != null && Request.Params["forumId"] != "")
+        {         
+            int forumId = 0;
+            try
             {
-                var list = new List<string>();
-                while (reader.Read())
-                {
-                    list.Add(reader.GetSqlValue(0).ToString());
-                }
-
-                allRecords = list.ToArray();
+                forumId = int.Parse(Request.Params["forumId"]);
             }
-        }
+            catch(Exception ex)
+            {
+                LResult.Text = "ERROR: " + ex.ToString();
+                return ;
+            }
 
-        if (allRecords.Count() == 1)
-        {
-            LTopicname.Text = allRecords[0];
-        }
-        else
-        {
-            LTopicname.Text = "ERROR: found " + allRecords.Count() + " topics with such ID";
+            string queryString = "SELECT question FROM Forum WHERE forumId = @forumId";
+
+            LResult.Text = "";
+
+            SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\mydb.mdf;Integrated Security=True");
+
+            string[] allRecords;
+
+            using (var command = new SqlCommand(queryString, connection))
+            {
+                command.Parameters.Add("@forumId", SqlDbType.Int).Value = forumId;
+                connection.Open();
+                using (var reader = command.ExecuteReader())
+                {
+                    var list = new List<string>();
+                    while (reader.Read())
+                    {
+                        list.Add(reader.GetSqlValue(0).ToString());
+                    }
+
+                    allRecords = list.ToArray();
+                }
+            }
+
+            if (allRecords.Count() == 1)
+            {
+                LTopicname.Text = allRecords[0];
+            }
+            else
+            {
+                LTopicname.Text = "ERROR: found " + allRecords.Count() + " topics with such ID";
+            }
         }
     }
 
     protected void BPostQuestion_Click(object sender, EventArgs e)
     {
             TextBox TBAnswer = (TextBox)LoginView1.FindControl("TBAnswer");
-            Label LResult = (Label)LoginView1.FindControl("LResult");
-
             int ctitleId = Convert.ToInt32(Request.QueryString["forumId"]);
             string question = TBAnswer.Text;
             string posterName = HttpContext.Current.User.Identity.Name;
@@ -107,5 +115,27 @@ public partial class Comments : System.Web.UI.Page
         int RowsAffected = command.ExecuteNonQuery();
         Response.Redirect("~/index.aspx");
          
+    }
+ 
+    protected void RepComments_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+        {
+            DataRowView row = (DataRowView)e.Item.DataItem;
+            string username = row.Row.ItemArray[3].ToString().Trim();
+            string currentUserName = User.Identity.Name;
+            var rolesArray = Roles.GetRolesForUser();
+
+            if ((String.Compare(username, currentUserName, 0) != 0) && rolesArray.Contains("Admin") == false && rolesArray.Contains("Moderator") == false)
+            {
+                LinkButton LBDeleteLink = (LinkButton)e.Item.FindControl("LBDeleteLink");
+                 if(LBDeleteLink != null)
+                     LBDeleteLink.Visible = false;
+
+                 LinkButton LBEditButton = (LinkButton)e.Item.FindControl("LBEditLink");
+                 if (LBEditButton != null) 
+                     LBEditButton.Visible = false;
+            }
+        }
     }
 }

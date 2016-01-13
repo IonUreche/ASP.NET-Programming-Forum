@@ -53,10 +53,16 @@ public partial class EditProfile : System.Web.UI.Page
                 {
                     TextBox TBfirstname = (TextBox)LoginView1.FindControl("TBFirstname");
                     TBfirstname.Text = allRecords[0].Trim();
+                    if (TBfirstname.Text == "Null") TBfirstname.Text = "";
+
                     TextBox TBlastname = (TextBox)LoginView1.FindControl("TBlastname");
                     TBlastname.Text = allRecords[1].Trim();
+                    if (TBlastname.Text == "Null") TBlastname.Text = "";
+
                     TextBox TBAge = (TextBox)LoginView1.FindControl("TBAge");
                     TBAge.Text = allRecords[2].Trim();
+                    if (TBAge.Text == "Null") TBAge.Text = "";
+
                     RadioButtonList TBgender = (RadioButtonList)LoginView1.FindControl("RadioButtonList1");
                     if (allRecords[3].Trim() == "Female")
                         TBgender.SelectedIndex = 1;
@@ -81,7 +87,7 @@ public partial class EditProfile : System.Web.UI.Page
 
         TextBox TBAge = (TextBox)LoginView1.FindControl("TBAge");
         int Age = int.Parse(TBAge.Text.Trim());
-
+        
         RadioButtonList TBgender = (RadioButtonList)LoginView1.FindControl("RadioButtonList1");
         string gender = "";
         gender = TBgender.SelectedValue.Trim();

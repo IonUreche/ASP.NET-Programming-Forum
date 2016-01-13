@@ -18,8 +18,8 @@
         </asp:Repeater>
         -->
     
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource3" OnSelectedIndexChanged="GridView1_SelectedIndexChanged1" AllowPaging="True" AllowSorting="True" BackColor="#FFFF66" style="margin-right: 5px" Width="882px">
-            <AlternatingRowStyle BackColor="#CC9900" BorderStyle="None" ForeColor="Black" />
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource3" OnSelectedIndexChanged="GridView1_SelectedIndexChanged1" AllowPaging="True" AllowSorting="True" BackColor="cornflowerblue" style="margin-right: 5px" Width="882px">
+            <AlternatingRowStyle BackColor="#91BBC9" BorderStyle="None" ForeColor="Black" />
             <Columns>
                 <asp:HyperLinkField DataNavigateUrlFields="forumId"
                     DataNavigateUrlFormatString="~/Comments.aspx?forumId={0}" 

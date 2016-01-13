@@ -1,11 +1,10 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="index.aspx.cs" Inherits="index" MasterPageFile="~/MasterPage.master"%>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
- 
+    <!--
     <asp:DropDownList ID="DDLCategories" runat="server" DataSourceID="SqlDataSource1" DataTextField="title" DataValueField="titleID" AutoPostBack="True">
-
     </asp:DropDownList>
-        
+      -->  
     <div style="width:600px; background-color: grey; padding-left:35px; padding-top:15px; padding-bottom:15px; padding-right:35px">
 
         <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">

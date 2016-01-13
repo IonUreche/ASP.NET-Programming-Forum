@@ -15,6 +15,13 @@ using System.Web.Security;
         {
             if (!IsPostBack)
             {
+                var rolesArray = Roles.GetRolesForUser();
+
+                if (rolesArray.Contains("Admin") == false && rolesArray.Contains("Moderator") == false)
+                {
+                    Response.Redirect("~/index.aspx");
+                }
+
                 int commentId = int.Parse(Request.Params["commentId"]);
 
                 string queryString = "SELECT forumId, answer FROM Thread WHERE threadId = @commentId";

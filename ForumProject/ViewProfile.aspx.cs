@@ -70,6 +70,7 @@ public partial class ViewProfile : System.Web.UI.Page
             connection.Close();
         }
     }
+
     protected void BBack_Click(object sender, EventArgs e)
     {
 

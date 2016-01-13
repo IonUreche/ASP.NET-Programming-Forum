@@ -98,19 +98,19 @@
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ControlToValidate="TBLastName" runat="server" ErrorMessage="Last name is required" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
                 <div style="padding: 10px">
-                    <asp:Label ID="Label7" runat="server" Text="Birthday:"></asp:Label>
+                    <asp:Label ID="Label7" runat="server" Text="Age:"></asp:Label>
                     <br />
-                    <asp:TextBox ID="TBBirthday" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ControlToValidate="TBBirthday" runat="server" ErrorMessage="Birthday is required" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                    <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="TBBirthday" ErrorMessage="Date must be in MM/DD/YYYY format" ForeColor="Red" Type="Date" Operator="DataTypeCheck" Display="Dynamic"></asp:CompareValidator>
+                    <asp:TextBox ID="TBAge" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ControlToValidate="TBAge" runat="server" ErrorMessage="Age is required" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                    <asp:RangeValidator ID="RV1" runat="server" ControlToValidate="TBAge" ErrorMessage="RangeValidator" MinimumValue="12" MaximumValue="100" Type="Integer" ForeColor="Red"/>
                 </div>
                 <div style="padding: 10px">
                     <asp:Label ID="Label3" runat="server" Text="Gender:"></asp:Label>
                     <br />
                     <div style="float: left; width: 120px">
                     <asp:RadioButtonList ID="RBLGender" runat="server" RepeatDirection="Horizontal">
-                        <asp:ListItem Text="Female" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="Male" Value="1"></asp:ListItem>
+                        <asp:ListItem Text="Male" Value="Male"></asp:ListItem>
+                        <asp:ListItem Text="Female" Value="Female"></asp:ListItem>
                     </asp:RadioButtonList>
                     </div>
                     <div style="float: right; width: 315px">
@@ -129,7 +129,7 @@
                         </tr>
                         <tr>
                             <td align="right">
-                                <asp:Button ID="ContinueButton" runat="server" BackColor="#FFFBFF" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" CausesValidation="False" CommandName="Continue" Font-Names="Verdana" ForeColor="#284775" Text="Continue" ValidationGroup="CreateUserWizard1" />
+                                <asp:Button ID="ContinueButton" runat="server" BackColor="#FFFBFF" BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" CausesValidation="False" CommandName="Continue" Font-Names="Verdana" ForeColor="#284775" Text="Continue" ValidationGroup="CreateUserWizard1" OnClick="ContinueButton_Click"/>
                             </td>
                         </tr>
                     </table>

@@ -13,7 +13,12 @@ public partial class DeleteComment : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        var rolesArray = Roles.GetRolesForUser();
 
+        if (rolesArray.Contains("Admin") == false && rolesArray.Contains("Moderator") == false)
+        {
+            Response.Redirect("~/index.aspx");
+        }
     }
 
     protected void BYes_Click(object sender, EventArgs e)

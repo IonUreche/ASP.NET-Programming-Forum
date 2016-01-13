@@ -22,9 +22,9 @@
     
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT [title], [titleID] FROM [Title]"></asp:SqlDataSource>
 
-    <asp:Repeater ID="RepComments" runat="server" DataSourceID="SqlDataSource1">
+    <asp:Repeater ID="RepComments" runat="server" DataSourceID="SqlDataSource1" OnItemDataBound="RepComments_ItemDataBound">
         <ItemTemplate>
-            <div style="background-color: coral">
+            <div style="background-color: cornflowerblue">
                 <div>
                     <h4> By <asp:HyperLink ID="HLViewProfile" runat="server" NavigateUrl='<%# "~/ViewProfile.aspx?username=" + Eval("postername") %>'><%# Eval("postername") %></asp:HyperLink> at <%# Eval("datetime") %></h4>
                 </div>
@@ -34,23 +34,26 @@
                     <h4> <%# Eval("answer") %> </h4>
                 </div>
                 <br />
+                <div>
+                    <asp:LinkButton ID="LBDeleteLink" runat="server" 
+                                CommandArgument='<%#Eval("threadId")%>' OnClick="deleteComment"> Delete </asp:LinkButton>
+                    &nbsp
+                    <asp:LinkButton ID="LBEditLink" runat="server"  
+                        CommandArgument='<%#Eval("threadId")%>' OnClick="editComment"> Edit </asp:LinkButton>
+                </div>
             </div>
 
-            <asp:LoginView ID="LoginView2" runat="server">
+            <!-- <asp:LoginView ID="LoginView2" runat="server">
                 <RoleGroups>
                     <asp:RoleGroup Roles="Admin,Moderator">
-                        <ContentTemplate>
-                            <asp:LinkButton ID="DeleteLink" runat="server" 
-                                CommandArgument='<%#Eval("threadId")%>' OnClick="deleteComment"> Delete </asp:LinkButton>
-                            |
-                            <asp:LinkButton ID="EditButton" runat="server"  
-                                CommandArgument='<%#Eval("threadId")%>' OnClick="editComment"> Edit </asp:LinkButton>
-                        </ContentTemplate>
+                        <ContentTemplate> -->     
+               
+                <!--  </ContentTemplate>
                     </asp:RoleGroup>
 
                  </RoleGroups>
             </asp:LoginView>
-
+                          -->
         </ItemTemplate>
 
         <SeparatorTemplate>
@@ -62,7 +65,7 @@
 
     <asp:LoginView ID="LoginView1" runat="server">
         <AnonymousTemplate>
-            <div style="background-color: goldenrod">NavigateUrl='<%# "~/Comments.aspx?forumId=" + DataBinder.Eval((Container.Parent as RepeaterItem).DataItem, "forumId")%>'
+            <div style="background-color: goldenrod">
                 You can't post answers as anonymous. Please sign up here: <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/SignUp.aspx"> Sign Up </asp:HyperLink>
             </div>
         </AnonymousTemplate>
@@ -76,14 +79,13 @@
                 <div>
                     <asp:Button ID="BPostComment" runat="server" Text="Post Your Answer" OnClick="BPostQuestion_Click" />
                 </div>
-
-                <div>
-                    <asp:Label ID="LResult" runat="server" Text="" ForeColor="Red"></asp:Label>
-                </div>
-
             </div>
         </LoggedInTemplate>
     </asp:LoginView>
+
+    <div>
+        <asp:Label ID="LResult" runat="server" Text="" ForeColor="Red"></asp:Label>
+    </div>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT * FROM [Thread] WHERE ([forumId] = @forumId)">
         <SelectParameters>
